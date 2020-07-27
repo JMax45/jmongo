@@ -1,0 +1,25 @@
+{
+  "name": "jmongo",
+  "version": "1.0.0",
+  "description": "A small module that I made to facilitate the use of mongodb.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JMax45/jmongo.git"
+  },
+  "keywords": [
+    "MongoDB"
+  ],
+  "author": "JMax",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JMax45/jmongo/issues"
+  },
+  "homepage": "https://github.com/JMax45/jmongo#readme",
+  "dependencies": {
+    "mongodb": "^3.5.9"
+  }
+}
