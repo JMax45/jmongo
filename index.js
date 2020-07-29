@@ -5,6 +5,20 @@ class JMongo{
         this.url = url;
         this.dbname = dbname;
     }
+    // Inserts a document
+    insertDocument(collection, value){
+        const MongoClient = require('mongodb').MongoClient;
+        const dbname = this.dbname
+        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbname);
+            dbo.collection(collection).insertOne(value, function(err, res) {
+                if (err) throw err;
+                console.log("[jmongo:insertDocument] Document inserted");
+                db.close();
+            });
+        });
+    }
     // Can be used to change or even create a property
     changeDocument(collection, query, newValues){
         const MongoClient = require('mongodb').MongoClient;
