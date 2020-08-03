@@ -1,9 +1,12 @@
-# Installation
+# JMongo
+
+## Installation
 Using npm: 
 ```bash
 npm i jmongo
 ```
-Usage:
+
+## Usage:
 ```
 const JMongo = require('jmongo');
 const jmongo = new JMongo(databaseUrl, dbname);
@@ -11,21 +14,33 @@ const jmongo = new JMongo(databaseUrl, dbname);
 Functions:
 
 ```changeDocument(collection, query, newValues);```
+
+Sets an attribute to the given value
 ```javascript
 jmongo.changeDocument('users', { id: '1' }, { name: 'HelloWorld' });
-// sets the name attribute to: 'Hello World'
 ```
 
 ```deleteField(collection, query, toDelete)```
+
+Deletes a specific field
 ```javascript
 jmongo.deleteField('users', { id: '1' }, { name: '' });
-// deletes the name field
 ```
 
 ```load(collection, query, callback)```
+
+Loads a document with the given query
 ```javascript
 jmongo.load('users', { id: '0' }, (result) => {
     console.log(result);
-    // loads the document with the given query
+});
+```
+
+```loadAll(collection, callback)```
+
+Loads the whole collection
+```javascript
+jmongo.loadAll('users', (result) => {
+    console.log(result);
 });
 ```

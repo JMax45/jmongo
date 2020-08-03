@@ -62,6 +62,7 @@ class JMongo{
             });
         });
     }
+    // Loads the whole collection
     loadAll(collection, callback){
         const MongoClient = require('mongodb').MongoClient;
         const dbname = this.dbname
