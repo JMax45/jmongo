@@ -76,6 +76,19 @@ class JMongo{
             });
         });
     }
+    // Deletes a document
+    deleteDocument(collection, query){
+        const MongoClient = require('mongodb').MongoClient;
+        const dbname = this.dbname
+        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbname);
+            dbo.collection(collection).deleteOne(query, function(err, obj) {
+                if (err) throw err;
+                db.close();
+            });
+        });
+    }
 }
 
 module.exports = JMongo;
