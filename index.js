@@ -20,7 +20,7 @@ class JMongo{
         });
     }
     // Can be used to change or even create a property
-    changeDocument(collection, query, newValues){
+    changeDocument(collection, query, newValues, callback){
         const MongoClient = require('mongodb').MongoClient;
         const dbname = this.dbname
         MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
@@ -30,6 +30,7 @@ class JMongo{
               if (err) throw err;
               console.log("[jmongo:changeDocument] Document updated");
               db.close();
+              callback();
             });
         });
     }
