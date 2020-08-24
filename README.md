@@ -13,7 +13,14 @@ const jmongo = new JMongo(databaseUrl, dbname);
 ```
 Functions:
 
-```changeDocument(collection, query, newValues);```
+```insertDocument(collection, value)```
+
+Inserts an object in the collection
+```javascript
+jmongo.insertDocument('users', yourObject);
+```
+
+```changeDocument(collection, query, newValues)```
 
 Sets an attribute to the given value
 ```javascript
@@ -43,4 +50,11 @@ Loads the whole collection
 jmongo.loadAll('users', (result) => {
     console.log(result);
 });
+```
+
+```deleteDocument(collection, query)```
+
+Deletes a document with the given query
+```javascript
+jmongo.deleteDocument('users', { id: 1 } );
 ```
