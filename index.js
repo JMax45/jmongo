@@ -90,6 +90,20 @@ class JMongo{
             });
         });
     }
+    // Load all documents with only given fields
+    loadAllWithFields(collection, fields, callback){
+        const MongoClient = require('mongodb').MongoClient;
+        const dbname = this.dbname
+        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbname);
+            dbo.collection(collection).find({}, { projection: fields }).toArray(function(err, result) {
+                if (err) throw err;
+                db.close();
+                callback(result);
+            });
+        });
+    }
 }
 
 module.exports = JMongo;
