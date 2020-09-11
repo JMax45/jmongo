@@ -5,118 +5,95 @@ class JMongo{
         this.url = url;
         this.dbname = dbname;
     }
-    // Inserts a document
-    insertDocument(collection, value){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).insertOne(value, function(err, res) {
-                if (err) throw err;
-                console.log("[jmongo:insertDocument] Document inserted");
-                db.close();
+    async insertDocument(collection, value){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).insertOne(value, function(err, res) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve()
+                });
             });
-        });
+        })
     }
-    // Can be used to change or even create a property
-    changeDocument(collection, query, newValues, callback){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).updateOne(query, { $set: newValues }, function(err, res) {
-              if (err) throw err;
-              console.log("[jmongo:changeDocument] Document updated");
-              db.close();
-              callback();
+    async changeDocumentProperty(collection, query, newValues){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).updateOne(query, { $set: newValues }, function(err, res) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve();
+                });
             });
-        });
+        })
     }
-    // Deletes a field from document
-    deleteField(collection, query, toDelete){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).updateOne(query, { $unset: toDelete }, function(err, res) {
-              if (err) throw err;
-              console.log("[jmongo:deleteField] Document updated");
-              db.close();
+    async deleteDocumentProperty(collection, query, toDelete){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).updateOne(query, { $unset: toDelete }, function(err, res) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve();
+                });
             });
-        });
+        })
     }
-    // Loads a document with the given query
-    load(collection, query, callback){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).findOne(query, function(err, result) {
-              if (err) throw err;
-              console.log('[jmongo:load] Document loaded');
-              db.close();
-              callback(result);
+    async load(collection, query){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).findOne(query, function(err, result) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve(result);
+                });
             });
-        });
+        })
     }
-    // Loads the whole collection
-    loadAll(collection, callback){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).find({}).toArray(function(err, result) {
-                if (err) throw err;
-                db.close();
-                callback(result);
+    async loadAll(collection, projection, query){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).find(query, { projection: projection }).toArray(function(err, result) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve(result);
+                });
             });
-        });
+        })
     }
-    // Deletes a document
-    deleteDocument(collection, query){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).deleteOne(query, function(err, obj) {
-                if (err) throw err;
-                db.close();
+    async deleteDocument(collection, query){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).deleteOne(query, function(err, obj) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve();
+                });
             });
-        });
-    }
-    // Load all documents with only given fields
-    loadAllWithFields(collection, fields, callback){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).find({}, { projection: fields }).toArray(function(err, result) {
-                if (err) throw err;
-                db.close();
-                callback(result);
-            });
-        });
-    }
-    // Load all documents with the given query
-    loadAllWithQuery(collection, query, callback){
-        const MongoClient = require('mongodb').MongoClient;
-        const dbname = this.dbname
-        MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db(dbname);
-            dbo.collection(collection).find(query).toArray(function(err, result) {
-                if (err) throw err;
-                db.close();
-                callback(result);
-            });
-        });
+        })
     }
 }
 
