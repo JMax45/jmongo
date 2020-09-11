@@ -1,6 +1,6 @@
 {
   "name": "jmongo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A small module that I made to facilitate the use of mongodb.",
   "main": "index.js",
   "scripts": {
