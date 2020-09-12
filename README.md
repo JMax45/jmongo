@@ -52,14 +52,14 @@ Loads the document with the given query and returns it in the promise
 jmongo.load('users', { id: 1 }).then((user) => { console.log(user) }
 ```
 
-```async loadAll(collection, projection, query) : Promise```
+```async loadAll(collection, query, projection) : Promise```
 
 Loads all the documents with the given projection, query and returns them in the promise.
 ```javascript
-jmongo.loadAll('users', { name: '', job: '' }, { company: 'Google' })
+jmongo.loadAll('users',{ company: 'Google' }, { name: '', job: '' })
     .then((users) => { console.log(users) }
 /* 
-This will return all the documents with the properties: { company: 'Google' }
+This will return all the documents with the property: { company: 'Google' }
 but it will only return the name and job properties
 example:
 [
@@ -76,17 +76,17 @@ example:
 ]
 */
 ```
-If you want to load all the properties then pass an empty object or null
-```javascript
-jmongo.loadAll('users', { }, { company: 'Google' })
-    .then((users) => { console.log(users) }
-```
-The same goes for the query, if you want to load all the documents in the collection just pass an empty object or null
+
+If you want to load all the documents in the collection just pass an empty object or null
 ```javascript
 jmongo.loadAll('users', { }, { })
     .then((users) => { console.log(users) }
 ```
-
+The same goes for the projection, if you want to load all the properties then pass an empty object or null (or just leave it blank)
+```javascript
+jmongo.loadAll('users', { company: 'Google' }, { })
+    .then((users) => { console.log(users) }
+```
 
 ```async deleteDocument(collection, query) : Promise```
 

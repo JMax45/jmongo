@@ -65,7 +65,7 @@ class JMongo{
             });
         })
     }
-    async loadAll(collection, projection, query){
+    async loadAll(collection, query, projection){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
             const dbname = this.dbname
