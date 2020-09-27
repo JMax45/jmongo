@@ -8,8 +8,8 @@ class JMongo{
 
     /**
      * Upload a document or an array of documents
-     * @param collection Name of the collection to upload to
-     * @param document The document to upload, can be an object or an array of objects
+     * @param {string} collection Collection name
+     * @param {Object} document The document to upload, can be an object or an array of objects
      */
     async insertDocument(collection, document){
         return new Promise((resolve, reject) => {
@@ -35,6 +35,13 @@ class JMongo{
             });
         })
     }
+
+    /**
+     * Change a document property or create one
+     * @param {string} collection Collection name
+     * @param {Object} query Query
+     * @param {Object} newValues New properties of the document
+     */
     async changeDocumentProperty(collection, query, newValues){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
@@ -50,6 +57,13 @@ class JMongo{
             });
         })
     }
+    
+    /**
+     * Deletes a document property
+     * @param {string} collection Collection name
+     * @param {Object} query Query
+     * @param {Object} toDelete The property to delete, e.g { name: '' } will delete the name property
+     */
     async deleteDocumentProperty(collection, query, toDelete){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
@@ -65,6 +79,12 @@ class JMongo{
             });
         })
     }
+
+    /**
+     * Loads the first found document with the given query and returns it in the promise
+     * @param {string} collection Collection name
+     * @param {Object} query Query
+     */
     async load(collection, query){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
@@ -80,6 +100,13 @@ class JMongo{
             });
         })
     }
+
+    /**
+     * Loads all the documents with the given projection, query and returns them in the promise.
+     * @param {string} collection Collection name
+     * @param {Object} query The query, pass empty object if you need to include all the documents in the collection
+     * @param {Object} projection Properties to include, pass empty object if you need to include all the properties
+     */
     async loadAll(collection, query, projection){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
@@ -95,6 +122,12 @@ class JMongo{
             });
         })
     }
+
+    /**
+     * Deletes the first found document with the given query
+     * @param {string} collection Collection name
+     * @param {Object} query Query
+     */
     async deleteDocument(collection, query){
         return new Promise((resolve, reject) => {
             const MongoClient = require('mongodb').MongoClient;
