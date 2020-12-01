@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/JMax45/jmongo/compare/v2.2.0...v2.3.0) (2020-12-01)
+
+
+### Features
+
+* add objectID instance function ([d494dde](https://github.com/JMax45/jmongo/commit/d494ddef6fdcd22618f3cc515df3ba46c541525a))
+
 ## 2.2.0 (2020-12-01)
 
 
