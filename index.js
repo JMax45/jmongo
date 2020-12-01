@@ -1,9 +1,17 @@
-const { connect } = require('mongodb');
+const { ObjectId } = require('mongodb');
 
 class JMongo{
     constructor(url, dbname){
         this.url = url;
         this.dbname = dbname;
+    }
+
+    /**
+     * Create a new ObjectID instance
+     * @param {string} str Can be a 24 byte hex string. 12 byte binary string or a Number
+     */
+    objectID(str){
+        return new ObjectId(str);
     }
 
     /**
