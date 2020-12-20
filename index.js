@@ -45,7 +45,7 @@ class JMongo{
     }
 
     /**
-     * Change a document property or create one
+     * Update a document property or create one
      * @param {string} collection Collection name
      * @param {Object} query Query
      * @param {Object} newValues New properties of the document
@@ -58,6 +58,28 @@ class JMongo{
                 if (err) reject(err);
                 var dbo = db.db(dbname);
                 dbo.collection(collection).updateOne(query, { $set: newValues }, function(err, res) {
+                    if (err) reject(err);
+                    db.close();
+                    resolve();
+                });
+            });
+        })
+    }
+
+    /**
+     * Update multiple documents property or create one
+     * @param {string} collection Collection name
+     * @param {Object} query Query
+     * @param {Object} newValues New properties of the documents
+     */
+    async changeDocumentPropertyAll(collection, query, newValues){
+        return new Promise((resolve, reject) => {
+            const MongoClient = require('mongodb').MongoClient;
+            const dbname = this.dbname
+            MongoClient.connect(this.url, {useUnifiedTopology: true}, function(err, db) {
+                if (err) reject(err);
+                var dbo = db.db(dbname);
+                dbo.collection(collection).updateMany(query, { $set: newValues }, function(err, res) {
                     if (err) reject(err);
                     db.close();
                     resolve();
