@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/JMax45/jmongo/compare/v2.3.0...v2.4.0) (2020-12-20)
+
+
+### Features
+
+* add change multiple documents property function ([61f3248](https://github.com/JMax45/jmongo/commit/61f324855002a9141bfa2b61699dfd66ca67790f))
+
 ## [2.3.0](https://github.com/JMax45/jmongo/compare/v2.2.0...v2.3.0) (2020-12-01)
 
 
